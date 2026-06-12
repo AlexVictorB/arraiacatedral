@@ -1,0 +1,146 @@
+[
+  {
+    "Tipo": "Comidas",
+    "Nome": "Cachorro-quente",
+    "Referencia": "",
+    "Preco": 15
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Doces",
+    "Referencia": "",
+    "Preco": 14
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Lanche Pernil",
+    "Referencia": "",
+    "Preco": 20
+  },
+    {
+    "Tipo": "Comidas",
+    "Nome": "Carne Louca",
+    "Referencia": "",
+    "Preco": 18
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Batata-frita",
+    "Referencia": "",
+    "Preco": 15
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Caldos",
+    "Referencia": "",
+    "Preco": 16
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Pastel",
+    "Referencia": "",
+    "Preco": 15
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Arroz Doce",
+    "Referencia": "",
+    "Preco": 12
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Milho",
+    "Referencia": "",
+    "Preco": 14
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Pamonha",
+    "Referencia": "",
+    "Preco": 14
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Canjica",
+    "Referencia": "",
+    "Preco": 12
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Curau",
+    "Referencia": "",
+    "Preco": 14
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Churrasco",
+    "Referencia": "Carne",
+    "Preco": 16
+  },
+  {
+    "Tipo": "Comidas",
+    "Nome": "Churrasco",
+    "Referencia": "Frango/Linguiça",
+    "Preco": 14
+  },
+  {
+    "Tipo": "Bebidas",
+    "Nome": "Cerveja Original",
+    "Referencia": "",
+    "Preco": 10
+  },
+    {
+    "Tipo": "Bebidas",
+    "Nome": "Cerveja Heineken",
+    "Referencia": "",
+    "Preco": 12
+  },
+  {
+    "Tipo": "Bebidas",
+    "Nome": "Refrigerante",
+    "Referencia": "",
+    "Preco": 10
+  },
+  {
+    "Tipo": "Bebidas",
+    "Nome": "Água ",
+    "Referencia": "",
+    "Preco": 6
+  },
+  {
+    "Tipo": "Bebidas",
+    "Nome": "Vinho Quente",
+    "Referencia": "",
+    "Preco": 12
+  },
+  {
+    "Tipo": "Bebidas",
+    "Nome": "Suco",
+    "Referencia": "",
+    "Preco": 10
+  },
+  {
+    "Tipo": "Bebidas",
+    "Nome": "Quentão",
+    "Referencia": "",
+    "Preco": 12
+  },
+  {
+    "Tipo": "Bebidas",
+    "Nome": "Chá de Amendoim",
+    "Referencia": "",
+    "Preco": 12
+  },
+    {
+    "Tipo": "Bebidas",
+    "Nome": "Suco de Milho",
+    "Referencia": "",
+    "Preco": 13
+  },
+  {
+    "Tipo": "Brinquedos",
+    "Nome": "Brincadeiras",
+    "Referencia": "",
+    "Preco": 12
+  }
+]

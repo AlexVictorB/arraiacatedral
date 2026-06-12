@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arraiá Sagrada Família</title>
+    <link rel="stylesheet" href="style.css?v=3">
+</head>
+
+<body>
+    <div id="scroll-area">
+        <header>
+            <img src="assets/titulo-catedral.png" alt="Logo Arraiá Mater" class="logo-header">
+            Arraiá Sagrada Família
+        </header>
+
+        <div id="product-list"></div>
+    </div>
+    <footer>
+        <div class="total-row">
+            <span class="total-label">Total Estimado:</span>
+            <span class="total-value" id="total-value">R$ 0.00</span>
+        </div>
+        <button class="btn-reset" id="btn-reset">Limpar</button>
+    </footer>
+
+    <script>
+        let produtos = [];
+        const productListEl = document.getElementById('product-list');
+        const totalValueEl = document.getElementById('total-value');
+        const btnReset = document.getElementById('btn-reset');
+
+        fetch('products.json')
+            .then(res => res.json())
+            .then(data => {
+                produtos = data.map((p, index) => ({
+                    id: index,
+                    nome: p.Nome,
+                    referencia: p.Referencia,
+                    preco: p.Preco,
+                    tipo: p.Tipo,
+                    quantidade: 0
+                }));
+                renderProducts();
+            });
+
+        function renderProducts() {
+            productListEl.innerHTML = '';
+
+            const grupos = produtos.reduce((acc, p) => {
+                (acc[p.tipo] = acc[p.tipo] || []).push(p);
+                return acc;
+            }, {});
+
+            for (const [tipo, items] of Object.entries(grupos)) {
+                const header = document.createElement('div');
+                header.className = 'category-header';
+                header.textContent = tipo;
+                productListEl.appendChild(header);
+
+                items.forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = 'product';
+
+                    const nomeExibicao = p.referencia ? `${p.nome} - ${p.referencia}` : p.nome;
+
+                    div.innerHTML = `
+                        <div class="info">
+                            <p class="name">${nomeExibicao}</p>
+                            <p class="price">R$ ${p.preco.toFixed(2)}</p>
+                        </div>
+                        <div class="controls">
+                            <button class="btn-qty btn-minus" onclick="updateQty(${p.id}, -1)" ${p.quantidade === 0 ? 'disabled' : ''}>-</button>
+                            <span class="qty">${p.quantidade}</span>
+                            <button class="btn-qty btn-plus" onclick="updateQty(${p.id}, 1)">+</button>
+                        </div>
+                    `;
+                    productListEl.appendChild(div);
+                });
+            }
+            updateTotals();
+        }
+
+        function updateQty(id, delta) {
+            const produto = produtos.find(p => p.id === id);
+            if (produto) {
+                produto.quantidade += delta;
+                if (produto.quantidade < 0) produto.quantidade = 0;
+                renderProducts();
+            }
+        }
+
+        function updateTotals() {
+            const total = produtos.reduce((sum, p) => sum + (p.preco * p.quantidade), 0);
+            totalValueEl.textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        btnReset.addEventListener('click', () => {
+            produtos.forEach(p => p.quantidade = 0);
+            renderProducts();
+        });
+    </script>
+</body>
+
+</html>

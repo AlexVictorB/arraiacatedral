@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Caixa - 13º Arraiá Mater</title>
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+
+<body>
+    <div id="scroll-area">
+        <header>
+            <img src="logo.png" alt="Logo Arraiá Mater" class="logo-header">
+            13º Arraiá Mater
+        </header>
+
+        <div id="product-list"></div>
+    </div>
+
+  <footer>
+    <div class="total-row">
+      <span class="total-label">TOTAL:</span>
+      <span class="total-value" id="total-value">R$ 0.00</span>
+    </div>
+    <div class="payment-row">
+      <div class="input-group">
+        <label>Valor Pago (R$)</label>
+        <input type="number" id="received-value" step="0.01" placeholder="0.00" inputmode="decimal">
+      </div>
+      <div class="change-display">
+        <div class="change-label">TROCO:</div>
+        <div class="change-value" id="change-value">R$ 0.00</div>
+      </div>
+    </div>
+    <button class="btn-finish" id="btn-finish" disabled>Limpar</button>
+  </footer>
+
+  <script>
+    let produtos = [];
+    const productListEl = document.getElementById('product-list');
+    const totalValueEl = document.getElementById('total-value');
+    const receivedInput = document.getElementById('received-value');
+    const changeValueEl = document.getElementById('change-value');
+    const btnFinish = document.getElementById('btn-finish');
+
+    fetch('products.json')
+      .then(res => res.json())
+      .then(data => {
+        produtos = data.map((p, index) => ({
+          id: index,
+          nome: p.Nome,
+          referencia: p.Referencia,
+          preco: p.Preco,
+          tipo: p.Tipo,
+          quantidade: 0
+        }));
+        renderProducts();
+      });
+
+    function renderProducts() {
+      productListEl.innerHTML = '';
+
+      const grupos = produtos.reduce((acc, p) => {
+        (acc[p.tipo] = acc[p.tipo] || []).push(p);
+        return acc;
+      }, {});
+
+      for (const [tipo, items] of Object.entries(grupos)) {
+        const header = document.createElement('div');
+        header.className = 'category-header';
+        header.textContent = tipo;
+        productListEl.appendChild(header);
+
+        items.forEach(p => {
+          const div = document.createElement('div');
+          div.className = 'product';
+
+          const nomeExibicao = p.referencia ? `${p.nome} - ${p.referencia}` : p.nome;
+
+          div.innerHTML = `
+                        <div class="info">
+                            <p class="name">${nomeExibicao}</p>
+                            <p class="price">R$ ${p.preco.toFixed(2)}</p>
+                        </div>
+                        <div class="controls">
+                            <button class="btn-qty btn-minus" onclick="updateQty(${p.id}, -1)" ${p.quantidade === 0 ? 'disabled' : ''}>-</button>
+                            <span class="qty">${p.quantidade}</span>
+                            <button class="btn-qty btn-plus" onclick="updateQty(${p.id}, 1)">+</button>
+                        </div>
+                    `;
+          productListEl.appendChild(div);
+        });
+      }
+      updateTotals();
+    }
+
+    function updateQty(id, delta) {
+      const produto = produtos.find(p => p.id === id);
+      if (produto) {
+        produto.quantidade += delta;
+        if (produto.quantidade < 0) produto.quantidade = 0;
+        renderProducts();
+      }
+    }
+
+    function updateTotals() {
+      const total = produtos.reduce((sum, p) => sum + (p.preco * p.quantidade), 0);
+      totalValueEl.textContent = `R$ ${total.toFixed(2)}`;
+
+      const received = parseFloat(receivedInput.value.replace(',', '.')) || 0;
+      let change = received - total;
+
+      if (total === 0) change = 0;
+
+      changeValueEl.textContent = `R$ ${(change > 0 ? change : 0).toFixed(2)}`;
+
+      if (received > 0 && received < total && total > 0) {
+        changeValueEl.classList.add('error');
+        btnFinish.disabled = true;
+      } else {
+        changeValueEl.classList.remove('error');
+        btnFinish.disabled = total === 0;
+      }
+    }
+
+    receivedInput.addEventListener('input', updateTotals);
+
+    btnFinish.addEventListener('click', () => {
+      produtos.forEach(p => p.quantidade = 0);
+      receivedInput.value = '';
+      renderProducts();
+    });
+  </script>
+</body>
+
+</html>
