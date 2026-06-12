@@ -204,13 +204,14 @@ footer {
 
 .input-group input {
   width: 100%;
-  padding: 6px; 
+  padding: 10px; 
   font-size: 16px; /* Mantido em 16px estritamente para evitar o auto-zoom nativo do Safari/iOS */
   font-weight: bold;
   border: 2px solid #ced4da;
   border-radius: 6px;
   box-sizing: border-box;
   text-align: center;
+  color: #dc3545;
 }
 
 .change-display {
