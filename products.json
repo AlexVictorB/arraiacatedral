@@ -85,6 +85,12 @@
   },
   {
     "Tipo": "Bebidas",
+    "Nome": "Bebidas Quentes",
+    "Referencia": "Chá de Amendoim, Quentão, Vinho Quente",
+    "Preco": 12
+  },
+  {
+    "Tipo": "Bebidas",
     "Nome": "Cerveja Original",
     "Referencia": "",
     "Preco": 10
@@ -108,30 +114,6 @@
     "Preco": 6
   },
   {
-    "Tipo": "Bebidas",
-    "Nome": "Vinho Quente",
-    "Referencia": "",
-    "Preco": 12
-  },
-  {
-    "Tipo": "Bebidas",
-    "Nome": "Suco",
-    "Referencia": "",
-    "Preco": 10
-  },
-  {
-    "Tipo": "Bebidas",
-    "Nome": "Quentão",
-    "Referencia": "",
-    "Preco": 12
-  },
-  {
-    "Tipo": "Bebidas",
-    "Nome": "Chá de Amendoim",
-    "Referencia": "",
-    "Preco": 12
-  },
-    {
     "Tipo": "Bebidas",
     "Nome": "Suco de Milho",
     "Referencia": "",
