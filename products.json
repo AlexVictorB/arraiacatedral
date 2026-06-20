@@ -15,7 +15,7 @@
     "Tipo": "Comidas",
     "Nome": "Lanche Pernil",
     "Referencia": "",
-    "Preco": 20
+    "Preco": 18
   },
     {
     "Tipo": "Comidas",
@@ -105,7 +105,7 @@
     "Tipo": "Bebidas",
     "Nome": "Refrigerante",
     "Referencia": "",
-    "Preco": 10
+    "Preco": 8
   },
   {
     "Tipo": "Bebidas",
@@ -123,6 +123,6 @@
     "Tipo": "Brinquedos",
     "Nome": "Brincadeiras",
     "Referencia": "",
-    "Preco": 12
+    "Preco": 10
   }
 ]
